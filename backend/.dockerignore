@@ -1,0 +1,6 @@
+backend.log
+backend.*.log
+*.exe
+*.test
+.git/
+.audit/

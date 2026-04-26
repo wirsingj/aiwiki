@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.exe
+*.test
+*.log
+*.tsbuildinfo
+.audit/
+.env
+.DS_Store
