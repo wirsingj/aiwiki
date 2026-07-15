@@ -1,12 +1,12 @@
 # AIWIKI Status
 
-Last audited: 2026-04-26
+Last audited: 2026-07-11
 
 ## Current State
 
 - Project root is `C:\Users\wirsi\OneDrive\Desktop\git\aiwiki`.
 - Canonical repo/project spelling is `aiwiki` / `AIWIKI`.
-- The directory is not currently initialized as a Git repository; `git status` reports no `.git` directory.
+- The directory is currently initialized as a Git repository on branch `main`; `git status --short` was clean on 2026-07-11.
 - No old project-name typo was found in source, docs, package metadata, or Go module paths outside ignored build/dependency output.
 - Backend structure matches the requested layout:
   - `backend/cmd/server/main.go`
