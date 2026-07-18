@@ -52,6 +52,11 @@ PowerShell helper:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test.ps1
 ```
 
+Latest sanitized verification on 2026-07-16:
+
+- `cd backend; go test ./...` passed.
+- `cd frontend; npm run build` passed.
+
 ## Important Files
 
 - `README.md`: project identity, provider setup, and local run guide.

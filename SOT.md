@@ -13,7 +13,7 @@ agent-guidance: Verify implementation claims against code and tests. Preserve le
 
 # AIWIKI SOT
 
-Updated: 2026-07-15
+Updated: 2026-07-16
 
 ## Identity
 
@@ -28,6 +28,7 @@ The project explicitly positions itself as parody/inspired-by and not affiliated
 - Provider modes for local Ollama, hosted OpenAI-compatible APIs, and deterministic demo output.
 - In-memory article cache with a documented TTL.
 - Backend article generation, validation, cache, hosted/demo/Ollama client, and HTTP handler packages.
+- Backend article normalization keeps optional generated arrays encoded as arrays instead of `null`.
 - Frontend layout, search, article page, article view, infobox, and API client components.
 - PowerShell helper scripts for doctor, dev, tests, Docker up/down, and cleanup.
 
@@ -36,7 +37,7 @@ The project explicitly positions itself as parody/inspired-by and not affiliated
 - Brand/legal posture matters because the product resembles wiki-style encyclopedia UX; preserve explicit non-affiliation language.
 - Local model behavior depends on available Ollama models and machine resources.
 - Hosted model mode requires secrets through environment variables only.
-- Prior status notes mention mobile horizontal overflow in the top search/header area.
+- Mobile overflow CSS guardrails were added for topbar/search/action/error/footer surfaces, but a screenshot-based visual smoke pass is still pending.
 - No database, auth, payments, tracking, or external content fetches are currently present; do not imply production SaaS maturity without new evidence.
 
 ## Validation State
@@ -51,4 +52,7 @@ cd frontend
 npm run build
 ```
 
-Prior `STATUS.md` records that backend tests and frontend production build passed on 2026-07-11. Re-run validation after material changes and update this SOT with the sanitized result.
+Latest sanitized validation on 2026-07-16:
+
+- `cd backend; go test ./...` passed.
+- `cd frontend; npm run build` passed.

@@ -133,6 +133,7 @@ a:hover {
   top: 0;
   z-index: 5;
   min-height: 58px;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -144,7 +145,12 @@ a:hover {
 
 .search {
   display: grid;
+  min-width: 0;
   width: min(680px, 100%);
+}
+
+.topbar .search {
+  flex: 1 1 auto;
 }
 
 .search-row {
@@ -178,6 +184,7 @@ a:hover {
 }
 
 .search button {
+  flex: 0 0 auto;
   padding: 0 14px;
 }
 
@@ -257,6 +264,7 @@ a:hover {
   width: min(1120px, calc(100% - 48px));
   margin: 24px auto 36px;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .notice {
@@ -278,6 +286,10 @@ a:hover {
   font-size: 13px;
 }
 
+.article-actions > * {
+  max-width: 100%;
+}
+
 .badge {
   border: 1px solid var(--accent);
   color: var(--accent);
@@ -288,7 +300,9 @@ a:hover {
 
 .secondary-button,
 .primary-button {
+  max-width: 100%;
   padding: 0 12px;
+  white-space: normal;
 }
 
 .primary-button {
@@ -426,6 +440,12 @@ a:hover {
   text-align: center;
 }
 
+.loading p,
+.error-state p {
+  max-width: 100%;
+  margin: 0;
+}
+
 .spinner {
   width: 36px;
   height: 36px;
@@ -441,6 +461,7 @@ footer {
   border-top: 1px solid var(--soft-border);
   color: var(--muted);
   font-size: 12px;
+  overflow-wrap: anywhere;
 }
 
 .sr-only {
@@ -484,11 +505,12 @@ footer {
   }
 
   .topbar {
-    padding: 10px 16px;
+    gap: 8px;
+    padding: 10px 12px;
   }
 
   .article-shell {
-    width: calc(100% - 32px);
+    width: calc(100% - 24px);
   }
 
   .infobox {
@@ -509,6 +531,11 @@ footer {
 @media (max-width: 520px) {
   .search button span {
     display: none;
+  }
+
+  .search button {
+    width: 42px;
+    padding: 0;
   }
 
   .home {

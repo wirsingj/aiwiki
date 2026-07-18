@@ -1,19 +1,10 @@
 # AIWIKI Risks
 
-## P1 - Mobile Layout Overflows
+## P1 - Mobile Layout Needs Visual Recheck
 
-At 390px wide, the top search bar and some page text overflow horizontally. The search button is partially clipped, and the article error heading can be cut off. This makes the demo feel broken on phones.
+Earlier audit notes found 390px horizontal overflow in the top search/header area and clipped article error text. CSS guardrails were added on 2026-07-16 for the sticky topbar, search forms, article actions, error/loading text, and footer, but the fix still needs screenshot-based visual verification on phone-width layouts.
 
 Likely areas: `frontend/src/styles.css`, especially `.topbar`, `.search`, `.article-shell`, and mobile media queries.
-
-## P1 - Frontend Can Crash On Valid But Incomplete Article JSON
-
-The backend only requires `title` and `summary` for parsed article JSON. If Ollama returns valid JSON that omits `sections`, `references`, or `seeAlso`, Go may encode nil slices as `null`, while the frontend expects arrays and calls `.length` / `.map`.
-
-Likely areas:
-
-- `backend/internal/article/service.go`
-- `frontend/src/components/ArticleView.tsx`
 
 ## P3 - Default Frontend Port Collision Needs Awareness
 
@@ -37,7 +28,7 @@ Likely areas:
 
 ## P2 - Malformed JSON Handling Needs Broader Tests
 
-Current tests cover fenced JSON and embedded JSON extraction. They do not cover the full service-level repair path, missing arrays, invalid field types, empty references, or JSON that is syntactically valid but structurally unsafe for the frontend.
+Current tests cover fenced JSON, embedded JSON extraction, and service-level normalization for missing/partial arrays. They do not cover the full service-level repair path, repair failure, invalid field types, or empty generated references beyond the fallback behavior.
 
 Likely areas:
 
@@ -83,8 +74,7 @@ TOC anchors are generated from section headings. Duplicate headings will create 
 
 Likely area: `frontend/src/components/ArticleView.tsx`
 
-## P3 - Local Demo Has No Request Size Guard On POST
+## Recently Mitigated
 
-Ollama responses are size-limited when read, but inbound request bodies are not explicitly limited. This is low risk for a local-only demo, but easy to harden.
-
-Likely area: `backend/internal/http/handlers.go`
+- 2026-07-16: Backend article normalization now keeps `sections`, `references`, `seeAlso`, section `paragraphs`, section `links`, and infobox `rows` encoded as arrays instead of `null`; missing/partial array tests were added.
+- POST `/api/article` request bodies are capped with `http.MaxBytesReader` and covered by `TestArticlePostRejectsOversizedBody`.

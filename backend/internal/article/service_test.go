@@ -2,6 +2,7 @@ package article
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"strings"
 	"testing"
@@ -128,6 +129,75 @@ func TestHealthReportsGenericProviderStatus(t *testing.T) {
 	}
 }
 
+func TestCreateNormalizesMissingArrays(t *testing.T) {
+	service := NewService(&staticGenerator{
+		raw: `{"title":"Sparse","summary":"Sparse summary.","infobox":{"heading":"Sparse"}}`,
+	}, 10*time.Minute)
+
+	article, err := service.Create(context.Background(), "Sparse", true)
+	if err != nil {
+		t.Fatalf("Create returned error: %v", err)
+	}
+
+	if article.Sections == nil {
+		t.Fatal("sections should be an empty slice, got nil")
+	}
+	if article.References == nil {
+		t.Fatal("references should contain fallback generated note, got nil")
+	}
+	if article.SeeAlso == nil {
+		t.Fatal("seeAlso should be an empty slice, got nil")
+	}
+	if article.Infobox == nil {
+		t.Fatal("infobox should be preserved")
+	}
+	if article.Infobox.Rows == nil {
+		t.Fatal("infobox rows should be an empty slice, got nil")
+	}
+
+	body, err := json.Marshal(article)
+	if err != nil {
+		t.Fatalf("Marshal returned error: %v", err)
+	}
+	jsonBody := string(body)
+	for _, unexpected := range []string{`"sections":null`, `"seeAlso":null`, `"rows":null`} {
+		if strings.Contains(jsonBody, unexpected) {
+			t.Fatalf("encoded article contains %s: %s", unexpected, jsonBody)
+		}
+	}
+}
+
+func TestCreateNormalizesPartialSectionArrays(t *testing.T) {
+	service := NewService(&staticGenerator{
+		raw: `{"title":"Partial","summary":"Partial summary.","sections":[{"heading":"Only heading"}],"references":[],"seeAlso":[]}`,
+	}, 10*time.Minute)
+
+	article, err := service.Create(context.Background(), "Partial", true)
+	if err != nil {
+		t.Fatalf("Create returned error: %v", err)
+	}
+	if len(article.Sections) != 1 {
+		t.Fatalf("sections length = %d, want 1", len(article.Sections))
+	}
+	if article.Sections[0].Paragraphs == nil {
+		t.Fatal("section paragraphs should be an empty slice, got nil")
+	}
+	if article.Sections[0].Links == nil {
+		t.Fatal("section links should be an empty slice, got nil")
+	}
+
+	body, err := json.Marshal(article)
+	if err != nil {
+		t.Fatalf("Marshal returned error: %v", err)
+	}
+	jsonBody := string(body)
+	for _, unexpected := range []string{`"paragraphs":null`, `"links":null`} {
+		if strings.Contains(jsonBody, unexpected) {
+			t.Fatalf("encoded article contains %s: %s", unexpected, jsonBody)
+		}
+	}
+}
+
 type recordingGenerator struct {
 	topic string
 }
@@ -151,4 +221,24 @@ func (g *recordingGenerator) Model() string {
 
 func (g *recordingGenerator) Provider() string {
 	return "test-provider"
+}
+
+type staticGenerator struct {
+	raw string
+}
+
+func (g *staticGenerator) GenerateArticleJSON(context.Context, string) (string, error) {
+	return g.raw, nil
+}
+
+func (g *staticGenerator) RepairArticleJSON(_ context.Context, raw string) (string, error) {
+	return raw, nil
+}
+
+func (g *staticGenerator) Health(context.Context) error {
+	return nil
+}
+
+func (g *staticGenerator) Model() string {
+	return "test"
 }

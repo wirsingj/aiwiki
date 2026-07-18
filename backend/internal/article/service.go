@@ -188,6 +188,20 @@ func normalizeArticle(a Article, slug string) Article {
 
 	if a.Infobox != nil {
 		a.Infobox.Heading = fallback(a.Infobox.Heading, a.Title)
+		if a.Infobox.Rows == nil {
+			a.Infobox.Rows = []InfoboxRow{}
+		}
+	}
+	if a.Sections == nil {
+		a.Sections = []Section{}
+	}
+	for i := range a.Sections {
+		if a.Sections[i].Paragraphs == nil {
+			a.Sections[i].Paragraphs = []string{}
+		}
+		if a.Sections[i].Links == nil {
+			a.Sections[i].Links = []string{}
+		}
 	}
 	if len(a.References) == 0 {
 		a.References = []Reference{{
@@ -198,6 +212,9 @@ func normalizeArticle(a Article, slug string) Article {
 	for i := range a.References {
 		a.References[i].Label = fallback(a.References[i].Label, "AI-generated note")
 		a.References[i].Note = ensureGeneratedReferenceNote(a.References[i].Note)
+	}
+	if a.SeeAlso == nil {
+		a.SeeAlso = []string{}
 	}
 	return a
 }
