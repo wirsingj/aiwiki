@@ -2,6 +2,10 @@
 
 AIWIKI is an independent local demo encyclopedia that generates wiki-style articles with a local Ollama model. It is a parody/inspired-by layout, not a Wikimedia project, and it does not use Wikipedia branding, logos, or scraped content. AIWIKI is not affiliated with Wikipedia, the Wikimedia Foundation, MediaWiki, Ollama, or any model provider.
 
+## AI Usage
+
+This project is maintained with AI-assisted development. See [AI_USAGE.md](AI_USAGE.md) for the disclosure and provenance expectations.
+
 ## Stack
 
 - Go backend with standard library HTTP

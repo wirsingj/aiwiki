@@ -15,5 +15,9 @@ documents:
     path: MAINTAINER_GUIDE.md
     title: Maintainer Guide
 
+supporting:
+  - path: AI_USAGE.md
+    role: ai-usage-disclosure
+
 phase: local-demo-encyclopedia
 notes: This file is a lightweight map for humans and coding agents. It is not a schema, build input, or release gate.
