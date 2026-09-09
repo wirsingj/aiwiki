@@ -6,8 +6,10 @@ purpose: Durable system shape, boundaries, and invariants for AIWIKI.
 belongs-here: components, provider boundaries, data flow, deployment shape, invariants, danger zones.
 not-here: volatile priorities, command reference, full work history.
 durability: stable; update when module boundaries, provider contracts, deployment, or runtime surfaces change.
+budget: About 700 words; a working target, not a length to fill.
 read-with: SOT; Maintainer Guide.
 update-when: backend/frontend responsibilities, provider architecture, cache behavior, or deployment topology changes.
+last-verified: not established; claims not rechecked in this refresh.
 agent-guidance: Preserve provider abstraction and brand-safety boundaries.
 ---
 

@@ -6,8 +6,10 @@ purpose: Current setup, commands, validation, diagnostics, and YAIML maintenance
 belongs-here: verified commands, setup notes, diagnostics, important files, danger files, troubleshooting.
 not-here: product direction, durable architecture, complete history.
 durability: current-only; remove dead commands quickly.
+budget: About 900 words; a working target, not a length to fill.
 read-with: SOT; Architecture.
 update-when: setup, commands, scripts, deployment, or provider configuration changes.
+last-verified: not established; claims not rechecked in this refresh.
 agent-guidance: Record sanitized command outcomes. Do not record secrets or local-only provider state.
 ---
 

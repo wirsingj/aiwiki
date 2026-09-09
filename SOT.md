@@ -6,8 +6,10 @@ purpose: Current engineering state, direction, risks, and priorities for AIWIKI.
 belongs-here: product identity, verified capabilities, validation state, known risks, next steps, uncertainty.
 not-here: durable architecture, command reference, complete audit history.
 durability: volatile; synthesize and prune aggressively.
+budget: About 800 words; a working target, not a length to fill.
 read-with: Architecture; Maintainer Guide.
 update-when: product direction, implementation reality, risks, validation, or priorities change.
+last-verified: not established; claims not rechecked in this refresh.
 agent-guidance: Verify implementation claims against code and tests. Preserve legal/brand caution.
 ---
 
