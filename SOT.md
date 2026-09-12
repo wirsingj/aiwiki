@@ -44,15 +44,7 @@ The project explicitly positions itself as parody/inspired-by and not affiliated
 
 ## Validation State
 
-Documented verification commands:
-
-```powershell
-cd backend
-go test ./...
-
-cd frontend
-npm run build
-```
+See [MAINTAINER_GUIDE.md](MAINTAINER_GUIDE.md) for verification commands.
 
 Latest sanitized validation on 2026-07-16:
 

@@ -54,10 +54,7 @@ PowerShell helper:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test.ps1
 ```
 
-Latest sanitized verification on 2026-07-16:
-
-- `cd backend; go test ./...` passed.
-- `cd frontend; npm run build` passed.
+See [SOT.md](SOT.md) for recorded validation outcomes.
 
 ## Important Files
 
@@ -71,10 +68,8 @@ Latest sanitized verification on 2026-07-16:
 
 ## YAIML Maintenance
 
-Provide the YAIML reference from the human prompt, workspace context, or a team-approved source at run time. Do not commit machine-specific reference paths, local drive names, user profile paths, `file://` URIs, localhost URLs, private workspace URLs, secrets, private transcripts, or raw sensitive logs into versioned project memory.
+Follow the synthesis, privacy, and retention rules in [AGENTS.md](AGENTS.md). Ordinary material updates replace changed facts and remove superseded or resolved state; keep one detailed home per fact. Measure affected memory before and after, compress safely first, and report necessary growth or retained budget overages in the task response.
 
-Phrases such as "update YAIML", "updated YAIML", "check new YAIML", "refresh YAIML", or "run a YAIML update" mean convention refresh, not an ordinary project-memory rewrite. For this repository, compare local YAIML scaffolding against the provided reference and update only compatible prompts, templates, discovery hints, agent-instruction pointers, or YAIML-maintenance guidance. Preserve project memory and the existing discovery layout unless a human explicitly authorizes a layout migration.
+For convention refresh requests (including "refresh YAIML"), obtain the human-provided, workspace-local, or team-approved reference at run time; request one if unavailable. Compare its update and init guidance with local instructions and maintenance notes. Keep private reference locations out of versioned files. Preserve project knowledge, local names, discovery layout/version, paths, and meaningful custom fields; layout migration requires explicit human authorization and consumer checks. Do not add prompt/template copies without a concrete local workflow.
 
-Phrases such as "clean up YAIML", "compress YAIML", "compact project memory", "prune project memory", or "prune SoT" mean to remove stale or repetitive memory while preserving current truth, evidence, human direction, decisions, unresolved conflicts, and uncertainty. Do not pad documents to meet budgets or delete necessary governed knowledge just to reduce word count.
-
-This repository does not need local YAIML prompt or template copies unless it already keeps them for a concrete workflow. Do not add `prompts/` or `templates/` just because the reference has them. Preserve project-specific SoT, Architecture, Maintainer Guide, risks, commands, naming, and supporting documents unless the reference changes how future agents should maintain YAIML here.
+For cleanup requests, remove stale or repetitive memory while preserving direction, evidence limits, decisions, uncertainty, unresolved conflicts, and governed records. Do not relocate history or delete necessary knowledge to meet budgets. Verify affected links, discovery paths, stable headers, and instruction scope; rerunning the same refresh should leave healthy files unchanged. Report configured persistence separately from observed fresh-session loading.
